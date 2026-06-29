@@ -27,6 +27,18 @@ app.use(loggerMiddleware);
 // Base API route
 app.use('/api', apiRouter);
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Welcome to the TravelMate AI Backend API!',
+    endpoints: {
+      health: '/health',
+      api: '/api'
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', database: dbService.isUsingMongo() ? 'mongodb' : 'json-file' });
